@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[11]:
+# In[23]:
 
 
 from flask import Flask
@@ -11,6 +11,7 @@ city_list = []
 output_1 = []
 output_2 = []
 output_3 = []
+temp_list = []
 w_dict = {}
 app = Flask(__name__)
 @app.route('/')
@@ -32,29 +33,30 @@ def hello():
             
         if location.find('td') and location.select_one('img'):
 #             print(location)
-            data = location.select_one('img').attrs['title']       
+            data = location.select_one('img').attrs['title']
+            temp_list.append(data)
             
-        
-    for i in range(0,6):
-        w_dict[city_list[i]]='구름 많고 눈'
+#   도시와 날씨의 짝을 맞춰주는 부분. // 실시간 데이터 받기   
+    for i in range(0,6): 
+        w_dict[city_list[i]]=temp_list[0]
     for i in range(6,8):
-        w_dict[city_list[i]]='구름 많고 눈'
+        w_dict[city_list[i]]=temp_list[1]
     for i in range(8,9):
-        w_dict[city_list[i]]='구름 많음'
+        w_dict[city_list[i]]= temp_list[2]
     for i in range(9,12):
-        w_dict[city_list[i]]='구름 많고 눈'
+        w_dict[city_list[i]]= temp_list[3]
     for i in range(12,15):
-        w_dict[city_list[i]]='구름 많고 눈'
+        w_dict[city_list[i]]= temp_list[4]
     for i in range(15,21):
-        w_dict[city_list[i]]='구름 많고 비/눈'
+        w_dict[city_list[i]]= temp_list[5]
     for i in range(21,27):
-        w_dict[city_list[i]]='구름 많고 비/눈'
+        w_dict[city_list[i]]= temp_list[6]
     for i in range(27,33,1):
-        w_dict[city_list[i]]='맑음'
+        w_dict[city_list[i]]= temp_list[7]
     for i in range(33,39,1):
-        w_dict[city_list[i]]='구름 많음'
+        w_dict[city_list[i]]= temp_list[8]
     for i in range(39,41,1):
-        w_dict[city_list[i]]='구름 많고 비'
+        w_dict[city_list[i]]= temp_list[9]
     for key, value in w_dict.items():
         output_2_2 = "<h4>날씨 {}</h4>".format(value)
         output_2.append(output_2_2)
